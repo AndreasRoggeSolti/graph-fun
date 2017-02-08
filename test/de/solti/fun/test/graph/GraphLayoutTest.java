@@ -6,27 +6,26 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
+import de.solti.fun.graph.examples.AbstractExample;
+import de.solti.fun.graph.examples.Harborth;
 import org.jgrapht.WeightedGraph;
 import org.jgrapht.graph.SimpleWeightedGraph;
 import org.junit.Test;
 
 import de.solti.fun.graph.layout.GraphLayouter;
 import de.solti.fun.graph.model.WeightedEdge;
-import de.solti.fun.graph.model.WeightedEdgeImpl;
 import de.solti.fun.graph.ui.GraphControls;
 import de.solti.fun.graph.ui.GraphPanel;
 
 public class GraphLayoutTest {
 
-	public static final double EDGE_DEFAULT_LENGTH = 60;
-	
 	@Test
 	public void testLayout() throws Exception {
-		WeightedGraph<String, WeightedEdge> stringGraph = createStringGraph(EDGE_DEFAULT_LENGTH);
+		WeightedGraph<String, WeightedEdge> stringGraph = createStringGraph(GraphLayouter.EDGE_DEFAULT_LENGTH);
 		
 		// note undirected edges are printed as: {<v1>,<v2>}
 		System.out.println(stringGraph.toString());
-		GraphLayouter<String, WeightedEdge> layouter = new GraphLayouter<>(EDGE_DEFAULT_LENGTH);
+		GraphLayouter<String, WeightedEdge> layouter = new GraphLayouter<>();
 		layouter.setGraph(stringGraph);
 		layouter.setCentralVertex("v7");
 		
@@ -87,39 +86,39 @@ public class GraphLayoutTest {
 		
 
 		// add edges to create a triangle
-		connect(g, v1,v2, edgeLength);
-		connect(g, v2,v3, edgeLength);
-		connect(g, v3,v1, edgeLength);
+		AbstractExample.connect(g, v1,v2, edgeLength);
+		AbstractExample.connect(g, v2,v3, edgeLength);
+		AbstractExample.connect(g, v3,v1, edgeLength);
 		
 		// 2-3, 4
-		connect(g, v2, v4, edgeLength);
-		connect(g, v3, v4, edgeLength);
+		AbstractExample.connect(g, v2, v4, edgeLength);
+		AbstractExample.connect(g, v3, v4, edgeLength);
 		// 3-4, 5
-		connect(g, v3, v5, edgeLength);
-		connect(g, v4, v5, edgeLength);
+		AbstractExample.connect(g, v3, v5, edgeLength);
+		AbstractExample.connect(g, v4, v5, edgeLength);
 		
 		// 4-5, 6
-		connect(g, v2, v6, edgeLength);
-		connect(g, v4, v6, edgeLength);
+		AbstractExample.connect(g, v2, v6, edgeLength);
+		AbstractExample.connect(g, v4, v6, edgeLength);
 		
-		connect(g, v6, v7, edgeLength);
-		connect(g, v6, v8, edgeLength);
-		connect(g, v7, v8, edgeLength);
+		AbstractExample.connect(g, v6, v7, edgeLength);
+		AbstractExample.connect(g, v6, v8, edgeLength);
+		AbstractExample.connect(g, v7, v8, edgeLength);
 
-		connect(g, v1,v12, edgeLength);
-		connect(g, v12,v13, edgeLength);
-		connect(g, v13,v1, edgeLength);
+		AbstractExample.connect(g, v1,v12, edgeLength);
+		AbstractExample.connect(g, v12,v13, edgeLength);
+		AbstractExample.connect(g, v13,v1, edgeLength);
 		
 		// 2-3, 4
-		connect(g, v12, v14, edgeLength);
-		connect(g, v13, v14, edgeLength);
+		AbstractExample.connect(g, v12, v14, edgeLength);
+		AbstractExample.connect(g, v13, v14, edgeLength);
 		// 3-4, 5
-		connect(g, v13, v15, edgeLength);
-		connect(g, v14, v15, edgeLength);
+		AbstractExample.connect(g, v13, v15, edgeLength);
+		AbstractExample.connect(g, v14, v15, edgeLength);
 		
 		// 4-5, 6
-		connect(g, v12, v8, edgeLength);
-		connect(g, v14, v8, edgeLength);
+		AbstractExample.connect(g, v12, v8, edgeLength);
+		AbstractExample.connect(g, v14, v8, edgeLength);
 		
 		return g;
 	}
@@ -155,24 +154,24 @@ public class GraphLayoutTest {
 		
 
 		// add edges to create a triangle
-		connect(g, v1,v2, edgeLength);
-		connect(g, v2,v3, edgeLength);
-		connect(g, v3,v1, edgeLength);
+		AbstractExample.connect(g, v1,v2, edgeLength);
+		AbstractExample.connect(g, v2,v3, edgeLength);
+		AbstractExample.connect(g, v3,v1, edgeLength);
 		
 		// 2-3, 4
-		connect(g, v2, v4, edgeLength);
-		connect(g, v3, v4, edgeLength);
+		AbstractExample.connect(g, v2, v4, edgeLength);
+		AbstractExample.connect(g, v3, v4, edgeLength);
 		// 3-4, 5
-		connect(g, v3, v5, edgeLength);
-		connect(g, v4, v5, edgeLength);
+		AbstractExample.connect(g, v3, v5, edgeLength);
+		AbstractExample.connect(g, v4, v5, edgeLength);
 		
 		// 4-5, 6
-		connect(g, v2, v6, edgeLength);
-		connect(g, v4, v6, edgeLength);
+		AbstractExample.connect(g, v2, v6, edgeLength);
+		AbstractExample.connect(g, v4, v6, edgeLength);
 		
-		connect(g, v6, v7, edgeLength);
-		connect(g, v6, v8, edgeLength);
-		connect(g, v7, v8, edgeLength);
+		AbstractExample.connect(g, v6, v7, edgeLength);
+		AbstractExample.connect(g, v6, v8, edgeLength);
+		AbstractExample.connect(g, v7, v8, edgeLength);
 
 		return g;
 	}
@@ -186,9 +185,9 @@ public class GraphLayoutTest {
 		String x2 = "x2";
 		g.addVertex(x1);
 		g.addVertex(x2);
-		
-		createHalfMoon(g, x1, x2, "a", EDGE_DEFAULT_LENGTH);
-		createHalfMoon(g, x1, x2, "b", EDGE_DEFAULT_LENGTH);
+
+		AbstractExample.createHalfMoon(g, x1, x2, "a", GraphLayouter.EDGE_DEFAULT_LENGTH);
+		AbstractExample.createHalfMoon(g, x1, x2, "b", GraphLayouter.EDGE_DEFAULT_LENGTH);
 		
 		showGraph(g);
 	}
@@ -204,10 +203,10 @@ public class GraphLayoutTest {
 		g.addVertex(x2);
 		g.addVertex(x3);
 //		g.addVertex(x4);
-		
-		createHalfDoubleMoon(g, x1, x2, "a", EDGE_DEFAULT_LENGTH);
-		createHalfDoubleMoon(g, x2, x3, "b", EDGE_DEFAULT_LENGTH);
-		createHalfDoubleMoon(g, x3, x1, "c", EDGE_DEFAULT_LENGTH);
+
+		AbstractExample.createHalfDoubleMoon(g, x1, x2, "a", GraphLayouter.EDGE_DEFAULT_LENGTH);
+		AbstractExample.createHalfDoubleMoon(g, x2, x3, "b", GraphLayouter.EDGE_DEFAULT_LENGTH);
+		AbstractExample.createHalfDoubleMoon(g, x3, x1, "c", GraphLayouter.EDGE_DEFAULT_LENGTH);
 //		createHalfMoon(g, x1, x2, "d", EDGE_DEFAULT_LENGTH);
 		
 		showGraph(g);
@@ -224,98 +223,16 @@ public class GraphLayoutTest {
 		g.addVertex(x2);
 		g.addVertex(x3);
 //		g.addVertex(x4);
-		
-		createHalfMoon(g, x1, x2, "a", EDGE_DEFAULT_LENGTH);
-		createHalfMoon(g, x2, x3, "b", EDGE_DEFAULT_LENGTH);
-		createHalfMoon(g, x3, x1, "c", EDGE_DEFAULT_LENGTH);
+
+		AbstractExample.createHalfMoon(g, x1, x2, "a", GraphLayouter.EDGE_DEFAULT_LENGTH);
+		AbstractExample.createHalfMoon(g, x2, x3, "b", GraphLayouter.EDGE_DEFAULT_LENGTH);
+		AbstractExample.createHalfMoon(g, x3, x1, "c", GraphLayouter.EDGE_DEFAULT_LENGTH);
 //		createHalfMoon(g, x1, x2, "d", EDGE_DEFAULT_LENGTH);
 		
 		showGraph(g);
 	}
 	
-	private void createHalfDoubleMoon(WeightedGraph<String,WeightedEdge> g, String x1, String x2, String prefix, double edgeLength) {
-		String center = prefix+"_c";
-		String conn1 = prefix+"_d";
-		
-		g.addVertex(center);
-		g.addVertex(conn1);
-		
-		createBird(g, center, x1, conn1, prefix+"a", EDGE_DEFAULT_LENGTH);
-		createBird(g, center, conn1, x2, prefix+"b", EDGE_DEFAULT_LENGTH);
-	}
-	
-	private void createHalfMoon(WeightedGraph<String,WeightedEdge> g, String x1, String x2, String prefix, double edgeLength) {
-		String center = prefix+"_c";
-		String conn1 = prefix+"_d";
-		String conn2 = prefix+"_e";
-		
-		g.addVertex(center);
-		g.addVertex(conn1);
-		g.addVertex(conn2);
-		
-		createBird(g, center, x1, conn1, prefix+"a", EDGE_DEFAULT_LENGTH);
-		createBird(g, center, conn1, conn2, prefix+"b", EDGE_DEFAULT_LENGTH);
-		createBird(g, center, conn2, x2, prefix+"c", EDGE_DEFAULT_LENGTH);
-		
-	}
 
-	private void createBird(WeightedGraph<String, WeightedEdge> g, String x1, String x2,
-			String x3, String prefix, double edgeLength) {
-		String v1 = prefix+"1";
-		String v2 = prefix+"2";
-		String v3 = prefix+"3";
-		String v4 = prefix+"4";
-		String v6 = prefix+"5";
-		String v8 = prefix+"6";
-		
-		String v12 = prefix+"7";
-		String v13 = prefix+"8";
-		String v14 = prefix+"9";
-		
-
-		// add the vertices
-		g.addVertex(v1);
-		g.addVertex(v2);
-		g.addVertex(v3);
-		g.addVertex(v4);
-		g.addVertex(v6);
-		g.addVertex(v8);
-		
-		g.addVertex(v12);
-		g.addVertex(v13);
-		g.addVertex(v14);
-
-		// add edges to create a triangle
-		connect(g, v1,v2, edgeLength);
-		connect(g, v2,v3, edgeLength);
-		connect(g, v3,v1, edgeLength);
-		// 2-3, 4
-		connect(g, v2, v4, edgeLength);
-		connect(g, v3, v4, edgeLength);
-		// 3-4, 5
-		connect(g, v3, x2, edgeLength);
-		connect(g, v4, x2, edgeLength);
-		// 4-5, 6
-		connect(g, v2, v6, edgeLength);
-		connect(g, v4, v6, edgeLength);
-		
-		connect(g, v6, x1, edgeLength);
-		connect(g, v6, v8, edgeLength);
-		connect(g, x1, v8, edgeLength);
-
-		connect(g, v1,v12, edgeLength);
-		connect(g, v12,v13, edgeLength);
-		connect(g, v13,v1, edgeLength);
-		// 2-3, 4
-		connect(g, v12, v14, edgeLength);
-		connect(g, v13, v14, edgeLength);
-		// 3-4, 5
-		connect(g, v13, x3, edgeLength);
-		connect(g, v14, x3, edgeLength);
-		// 4-5, 6
-		connect(g, v12, v8, edgeLength);
-		connect(g, v14, v8, edgeLength);
-	}
 
 	@Test
 	public void testLego() throws Exception {
@@ -343,12 +260,12 @@ public class GraphLayoutTest {
 		g.addVertex(x8);
 		g.addVertex(x9);
 
-		connect(g, x2, x3, EDGE_DEFAULT_LENGTH);
-		connect(g, x5, x6, EDGE_DEFAULT_LENGTH);
-		connect(g, x7, x8, EDGE_DEFAULT_LENGTH);
+		AbstractExample.connect(g, x2, x3, GraphLayouter.EDGE_DEFAULT_LENGTH);
+		AbstractExample.connect(g, x5, x6, GraphLayouter.EDGE_DEFAULT_LENGTH);
+		AbstractExample.connect(g, x7, x8, GraphLayouter.EDGE_DEFAULT_LENGTH);
 		
-		createHalfLego(g, x1, x2, x4, x5, x7,x9, "a", EDGE_DEFAULT_LENGTH);
-		createHalfLego(g, x1, x3, x4, x6, x8,x9, "b", EDGE_DEFAULT_LENGTH);
+		createHalfLego(g, x1, x2, x4, x5, x7,x9, "a", GraphLayouter.EDGE_DEFAULT_LENGTH);
+		createHalfLego(g, x1, x3, x4, x6, x8,x9, "b", GraphLayouter.EDGE_DEFAULT_LENGTH);
 		showGraph(g);
 	}
 	
@@ -415,137 +332,77 @@ public class GraphLayoutTest {
 		
 		
 		// add edges to create a triangle
-		connect(g, a1,x1, edgeLength);
-		connect(g, a1,x2, edgeLength);
-		connect(g, x1,x2, edgeLength);
+		AbstractExample.connect(g, a1,x1, edgeLength);
+		AbstractExample.connect(g, a1,x2, edgeLength);
+		AbstractExample.connect(g, x1,x2, edgeLength);
 		
-		connect(g, a1,a2, edgeLength);
-		connect(g, a1,a3, edgeLength);
-		connect(g, a2,a3, edgeLength);
-		connect(g, a2,a4, edgeLength);
-		connect(g, a3,a4, edgeLength);
-		connect(g, a3,a5, edgeLength);
-		connect(g, a4,a5, edgeLength);
+		AbstractExample.connect(g, a1,a2, edgeLength);
+		AbstractExample.connect(g, a1,a3, edgeLength);
+		AbstractExample.connect(g, a2,a3, edgeLength);
+		AbstractExample.connect(g, a2,a4, edgeLength);
+		AbstractExample.connect(g, a3,a4, edgeLength);
+		AbstractExample.connect(g, a3,a5, edgeLength);
+		AbstractExample.connect(g, a4,a5, edgeLength);
 		
-		connect(g, a4,a6, edgeLength);
-		connect(g, a5,a6, edgeLength);
-		connect(g, a5,a7, edgeLength);
-		connect(g, a7,a6, edgeLength);
+		AbstractExample.connect(g, a4,a6, edgeLength);
+		AbstractExample.connect(g, a5,a6, edgeLength);
+		AbstractExample.connect(g, a5,a7, edgeLength);
+		AbstractExample.connect(g, a7,a6, edgeLength);
 		
-		connect(g, d5,d2, edgeLength);
-		connect(g, d5,d4, edgeLength);
-		connect(g, d1,d2, edgeLength);
-		connect(g, d1,d3, edgeLength);
-		connect(g, d2,d3, edgeLength);
-		connect(g, d2,d4, edgeLength);
-		connect(g, d3,d4, edgeLength);
-		connect(g, d3,a7, edgeLength);
-		connect(g, d4,a7, edgeLength);
+		AbstractExample.connect(g, d5,d2, edgeLength);
+		AbstractExample.connect(g, d5,d4, edgeLength);
+		AbstractExample.connect(g, d1,d2, edgeLength);
+		AbstractExample.connect(g, d1,d3, edgeLength);
+		AbstractExample.connect(g, d2,d3, edgeLength);
+		AbstractExample.connect(g, d2,d4, edgeLength);
+		AbstractExample.connect(g, d3,d4, edgeLength);
+		AbstractExample.connect(g, d3,a7, edgeLength);
+		AbstractExample.connect(g, d4,a7, edgeLength);
 		
-		connect(g, d1,b2, edgeLength);
-		connect(g, d1,b3, edgeLength);
-		connect(g, b2,b3, edgeLength);
-		connect(g, b2,b4, edgeLength);
-		connect(g, b3,b4, edgeLength);
-		connect(g, b3,b5, edgeLength);
-		connect(g, b4,b5, edgeLength);
+		AbstractExample.connect(g, d1,b2, edgeLength);
+		AbstractExample.connect(g, d1,b3, edgeLength);
+		AbstractExample.connect(g, b2,b3, edgeLength);
+		AbstractExample.connect(g, b2,b4, edgeLength);
+		AbstractExample.connect(g, b3,b4, edgeLength);
+		AbstractExample.connect(g, b3,b5, edgeLength);
+		AbstractExample.connect(g, b4,b5, edgeLength);
 		
-		connect(g, b4,b6, edgeLength);
-		connect(g, b5,b6, edgeLength);
-		connect(g, b5,b7, edgeLength);
-		connect(g, b7,b6, edgeLength);
+		AbstractExample.connect(g, b4,b6, edgeLength);
+		AbstractExample.connect(g, b5,b6, edgeLength);
+		AbstractExample.connect(g, b5,b7, edgeLength);
+		AbstractExample.connect(g, b7,b6, edgeLength);
 		
-		connect(g, i1, a2, edgeLength);
-		connect(g, i1, x2, edgeLength);
-		connect(g, i1, i2, edgeLength);
-		connect(g, i1, x4, edgeLength);
-		connect(g, i2, a6, edgeLength);
-		connect(g, i2, x4, edgeLength);
-		connect(g, i2, d5, edgeLength);
-		connect(g, i3, d5, edgeLength);
-		connect(g, i3, b2, edgeLength);
-		connect(g, i3, x5, edgeLength);
-		connect(g, i3, i4, edgeLength);
-		connect(g, i4, b6, edgeLength);
-		connect(g, i4, x7, edgeLength);
-		connect(g, i4, x5, edgeLength);
-		connect(g, b7, x7, edgeLength);
-		connect(g, b7, x9, edgeLength);
-		connect(g, x7, x9, edgeLength);
-		connect(g, x4, x5, edgeLength);
+		AbstractExample.connect(g, i1, a2, edgeLength);
+		AbstractExample.connect(g, i1, x2, edgeLength);
+		AbstractExample.connect(g, i1, i2, edgeLength);
+		AbstractExample.connect(g, i1, x4, edgeLength);
+		AbstractExample.connect(g, i2, a6, edgeLength);
+		AbstractExample.connect(g, i2, x4, edgeLength);
+		AbstractExample.connect(g, i2, d5, edgeLength);
+		AbstractExample.connect(g, i3, d5, edgeLength);
+		AbstractExample.connect(g, i3, b2, edgeLength);
+		AbstractExample.connect(g, i3, x5, edgeLength);
+		AbstractExample.connect(g, i3, i4, edgeLength);
+		AbstractExample.connect(g, i4, b6, edgeLength);
+		AbstractExample.connect(g, i4, x7, edgeLength);
+		AbstractExample.connect(g, i4, x5, edgeLength);
+		AbstractExample.connect(g, b7, x7, edgeLength);
+		AbstractExample.connect(g, b7, x9, edgeLength);
+		AbstractExample.connect(g, x7, x9, edgeLength);
+		AbstractExample.connect(g, x4, x5, edgeLength);
 		
 	}
 
 	@Test
 	public void testHarborth() throws Exception {
-		WeightedGraph<String, WeightedEdge> g = new SimpleWeightedGraph<>(WeightedEdge.class);
-		
-		String x1 = "x1";
-		String x2 = "x2";
-		
-		String x3 = "x3";
-		String x4 = "x4";
-		
-		String x5 = "x5";
-		String x6 = "x6";
-		
-		String x7 = "x7";
-		String x8 = "x8";
-		
-		g.addVertex(x1);
-		g.addVertex(x2);
-		g.addVertex(x3);
-		g.addVertex(x4);
-		g.addVertex(x5);
-		g.addVertex(x6);
-		g.addVertex(x7);
-		g.addVertex(x8);
-		
-		createQuarterHarborth(g, x2, x1, x3, x4, "a", EDGE_DEFAULT_LENGTH);
-		createQuarterHarborth(g, x6, x5, x3, x4, "b", EDGE_DEFAULT_LENGTH);
-		createQuarterHarborth(g, x6, x5, x7, x8, "c", EDGE_DEFAULT_LENGTH);
-		createQuarterHarborth(g, x2, x1, x7, x8, "d", EDGE_DEFAULT_LENGTH);
-		
-		showGraph(g);
+		showGraph(new Harborth().getHarborth());
 	}
 	
 	@Test
 	public void testHarborthV2() throws Exception {
-		WeightedGraph<String, WeightedEdge> g = new SimpleWeightedGraph<>(WeightedEdge.class);
+
 		
-		String x1 = "x1";
-		String x2 = "x2";
-		
-		String x3 = "x3";
-		String x4 = "x4";
-		
-		String x5 = "x5";
-		String x6 = "x6";
-		
-		String x7 = "x7";
-		String x8 = "x8";
-		
-		String y1 = "y1";
-		String y2 = "y2";
-		
-		g.addVertex(x1);
-		g.addVertex(x2);
-		g.addVertex(x3);
-		g.addVertex(x4);
-		g.addVertex(x5);
-		g.addVertex(x6);
-		g.addVertex(x7);
-		g.addVertex(x8);
-		
-		g.addVertex(y1);
-		g.addVertex(y2);
-		
-		createQuarterHarborthV2(g, x2, x1, x3, x4, y1, "a", EDGE_DEFAULT_LENGTH);
-		createQuarterHarborthV2(g, x6, x5, x3, x4, y2, "b", EDGE_DEFAULT_LENGTH);
-		createQuarterHarborthV2(g, x6, x5, x7, x8, y2, "c", EDGE_DEFAULT_LENGTH);
-		createQuarterHarborthV2(g, x2, x1, x7, x8, y1, "d", EDGE_DEFAULT_LENGTH);
-		
-		showGraph(g);
+		showGraph(new Harborth().getHarborthV2());
 	}
 	
 	@Test
@@ -576,11 +433,13 @@ public class GraphLayoutTest {
 		g.addVertex(x8);
 		
 		g.addVertex(y1);
+
+		Harborth harborth = new Harborth();
 		
-		createQuarterHarborthV2(g, x2, x1, x3, x4, y1, "a", EDGE_DEFAULT_LENGTH);
-		createQuarterHarborth(g, x6, x5, x3, x4, "b", EDGE_DEFAULT_LENGTH);
-		createQuarterHarborth(g, x6, x5, x7, x8, "c", EDGE_DEFAULT_LENGTH);
-		createQuarterHarborthV2(g, x2, x1, x7, x8, y1, "d", EDGE_DEFAULT_LENGTH);
+		harborth.createQuarterHarborthV2(g, x2, x1, x3, x4, y1, "a", GraphLayouter.EDGE_DEFAULT_LENGTH);
+		harborth.createQuarterHarborth(g, x6, x5, x3, x4, "b", GraphLayouter.EDGE_DEFAULT_LENGTH);
+		harborth.createQuarterHarborth(g, x6, x5, x7, x8, "c", GraphLayouter.EDGE_DEFAULT_LENGTH);
+		harborth.createQuarterHarborthV2(g, x2, x1, x7, x8, y1, "d", GraphLayouter.EDGE_DEFAULT_LENGTH);
 		
 		showGraph(g);
 	}
@@ -588,7 +447,7 @@ public class GraphLayoutTest {
 
 	public GraphLayouter<String, WeightedEdge> showGraph(WeightedGraph<String, WeightedEdge> g) {
 		// note undirected edges are printed as: {<v1>,<v2>}
-		GraphLayouter<String, WeightedEdge> layouter = new GraphLayouter<>(EDGE_DEFAULT_LENGTH);
+		GraphLayouter<String, WeightedEdge> layouter = new GraphLayouter<>(GraphLayouter.EDGE_DEFAULT_LENGTH);
 		
 		layouter.setGraph(g);
 		layouter.setCentralVertex("x2");
@@ -606,144 +465,5 @@ public class GraphLayoutTest {
 		frame.setVisible(true);
 		Map<String, Point2D.Double> layout = layouter.getLayout();
 		return layouter;
-	}
-	
-	private static void createQuarterHarborth(WeightedGraph<String, WeightedEdge> g, String vA, String vB, String vC, String vD, String prefix, double edgeLength){
-		String a2 = prefix+"2";
-		String a3 = prefix+"3";
-		String a4 = prefix+"4";
-		String a5 = prefix+"5";
-		String a6 = prefix+"6";
-		String a7 = prefix+"7";
-		
-		String c2 = prefix+"8"; // c2
-		String c3 = prefix+"9"; // c3
-		
-		String d2 = prefix+"a"; // d2
-		String d3 = prefix+"b"; // d3
-		String d4 = prefix+"c"; // d4
-		
-				// add the vertices
-		g.addVertex(a2);
-		g.addVertex(a3);
-		g.addVertex(a4);
-		g.addVertex(a5);
-		g.addVertex(a6);
-		g.addVertex(a7);
-		
-		g.addVertex(c2);
-		g.addVertex(c3);
-		
-		g.addVertex(d2);
-		g.addVertex(d3);
-		g.addVertex(d4);
-		
-		// add edges to create a triangle
-		connect(g, vA,a2, edgeLength);
-		connect(g, vA,a3, edgeLength);
-		connect(g, a2,a3, edgeLength);
-		connect(g, a2,a4, edgeLength);
-		connect(g, a3,a4, edgeLength);
-		connect(g, a3,a5, edgeLength);
-		connect(g, a4,a5, edgeLength);
-		
-		connect(g, a4,a6, edgeLength);
-		connect(g, a5,a6, edgeLength);
-		connect(g, a5,a7, edgeLength);
-		connect(g, a7,a6, edgeLength);
-		
-		connect(g, vB,a2, edgeLength);
-		connect(g, vB,c2, edgeLength);
-		
-		connect(g, vC,c2, edgeLength);
-		connect(g, vC,c3, edgeLength);
-		
-		connect(g, c2,c3, edgeLength);
-		connect(g, c2,a6, edgeLength);
-		
-		connect(g, c3,d2, edgeLength);
-		connect(g, c3,d4, edgeLength);
-		connect(g, vD,d2, edgeLength);
-		connect(g, vD,d3, edgeLength);
-		connect(g, d2,d3, edgeLength);
-		connect(g, d2,d4, edgeLength);
-		connect(g, d3,d4, edgeLength);
-		connect(g, d3,a7, edgeLength);
-		connect(g, d4,a7, edgeLength);
-	}
-	
-	private static void createQuarterHarborthV2(WeightedGraph<String, WeightedEdge> g, String vA, String vB, String vC, String vD, String vE, String prefix, double edgeLength){
-		String a2 = prefix+"2";
-		String a3 = prefix+"3";
-		String a4 = prefix+"4";
-		String a5 = prefix+"5";
-		String a6 = prefix+"6";
-		String a7 = prefix+"7";
-		
-		String c2 = prefix+"8"; // c2
-		String c3 = prefix+"9"; // c3
-		
-		String d2 = prefix+"a"; // d2
-		String d3 = prefix+"b"; // d3
-		String d4 = prefix+"c"; // d4
-		
-				// add the vertices
-		g.addVertex(a2);
-		g.addVertex(a3);
-		g.addVertex(a4);
-		g.addVertex(a5);
-		g.addVertex(a6);
-		g.addVertex(a7);
-		
-		g.addVertex(c2);
-		g.addVertex(c3);
-		
-		g.addVertex(d2);
-		g.addVertex(d3);
-		g.addVertex(d4);
-		
-		// add edges to create a triangle
-		connect(g, vA,a2, edgeLength);
-		connect(g, vA,a3, edgeLength);
-		connect(g, a2,a3, edgeLength);
-		connect(g, a2,a4, edgeLength);
-		connect(g, a3,a4, edgeLength);
-		connect(g, a3,a5, edgeLength);
-		connect(g, a4,a5, edgeLength);
-		
-		connect(g, a4,a6, edgeLength);
-		connect(g, a5,a6, edgeLength);
-		connect(g, a5,a7, edgeLength);
-		connect(g, a7,a6, edgeLength);
-		
-		connect(g, vB,a2, edgeLength);
-		connect(g, vB,c2, edgeLength);
-		
-		//connect(g, vC,c2, edgeLength);
-		connect(g, vE,c2, edgeLength);
-		connect(g, vE,vC, edgeLength);
-		
-		connect(g, vC,c3, edgeLength);
-		
-		connect(g, c2,c3, edgeLength);
-		connect(g, c2,a6, edgeLength);
-		
-		connect(g, c3,d2, edgeLength);
-		connect(g, c3,d4, edgeLength);
-		connect(g, vD,d2, edgeLength);
-		connect(g, vD,d3, edgeLength);
-		connect(g, d2,d3, edgeLength);
-		connect(g, d2,d4, edgeLength);
-		connect(g, d3,d4, edgeLength);
-		connect(g, d3,a7, edgeLength);
-		connect(g, d4,a7, edgeLength);
-	}
-
-	private static void connect(WeightedGraph<String, WeightedEdge> g, String v1, String v2, double edgeLength){
-		g.addEdge(v1, v2, new WeightedEdgeImpl(edgeLength));
-	}
-	
-	private static void connect(WeightedGraph<String, WeightedEdge> g, String v1, String v2, int edgeLength) {
-		connect(g, v1, v2, (double)edgeLength);
 	}
 }

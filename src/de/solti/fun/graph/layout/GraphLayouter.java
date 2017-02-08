@@ -1,5 +1,6 @@
 package de.solti.fun.graph.layout;
 
+import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
@@ -13,12 +14,21 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Observable;
 
+import de.solti.fun.graph.examples.Harborth;
+import de.solti.fun.graph.ui.GraphControls;
+import de.solti.fun.graph.ui.GraphPanel;
 import org.jgrapht.Graph;
 
 import de.solti.fun.graph.Utils;
 import de.solti.fun.graph.model.WeightedEdge;
+import org.jgrapht.WeightedGraph;
+
+import javax.swing.*;
 
 public class GraphLayouter<V,E> extends Observable implements Layouter<V, E>{
+
+	/** default edge length in pixel */
+	public static final double EDGE_DEFAULT_LENGTH = 60;
 
 	private static final long MAX_ITERATIONS = 100000;
 
@@ -61,11 +71,42 @@ public class GraphLayouter<V,E> extends Observable implements Layouter<V, E>{
 	private double percentageError = 0;
 
 	private double lastEdgesSwitched = 1;
+
+	public GraphLayouter(){
+		this(EDGE_DEFAULT_LENGTH);
+	}
 	
 	public GraphLayouter(double edgeLength){
 		this.targetEdgeLength = edgeLength;
 		this.pause = true;
 		this.xZeroNodes = new LinkedList<>();
+	}
+
+	public static void main(String[] args) {
+		GraphLayouter layouter = new GraphLayouter<String, WeightedEdge>();
+		layouter.showGraph(new Harborth().getHarborth());
+	}
+
+	public GraphLayouter<String, WeightedEdge> showGraph(WeightedGraph<String, WeightedEdge> g) {
+		// note undirected edges are printed as: {<v1>,<v2>}
+		GraphLayouter<String, WeightedEdge> layouter = new GraphLayouter<>(GraphLayouter.EDGE_DEFAULT_LENGTH);
+
+		layouter.setGraph(g);
+		layouter.setCentralVertex("x2");
+
+//		layouter.setXZeroVertex("x1");
+
+		GraphPanel<String, WeightedEdge> panel = new GraphPanel<>(layouter);
+		GraphControls<String, WeightedEdge> controls = new GraphControls<>(layouter);
+
+		JFrame frame = new JFrame("Graph Layouter");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().add(controls, BorderLayout.NORTH);
+		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		frame.pack();
+		frame.setVisible(true);
+		Map<String, Point2D.Double> layout = layouter.getLayout();
+		return layouter;
 	}
 	
 	public void setGraph(Graph<V,E> g){
